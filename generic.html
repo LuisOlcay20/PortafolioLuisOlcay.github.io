@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Portafolio Luis Olcay</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">🐅🐉🦉</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Portafolio 🚀</a></li>
+							<li class="active"><a href="generic.html">Power BI: DAX Hacks😎</li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/luis-olcay/" class="icon brands alt fa-linkedin"><span class="label">Linkedin</span></a></li>
+									<li><a href="https://github.com/LuisOlcay20" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1>Fundamentals of Data Modeling and DAX Basics<br />
+									</h1>
+									por <a href="https://www.linkedin.com/in/luis-olcay/"> @LuisOlcay</a> 
+								</header>
+								<div class="image main"><img src="images/PBI.png" alt="" /></div>
+	
+								<title>Fundamentals of Data Modeling and DAX Basics</title>
+							</head>
+							<body>
+								<h2>Data Model Basics:</h2>
+								<p>Data tables (fact tables): contain business values such as quantities, incomes, pageviews, etc.</p>
+								<p>Lookup tables (dimension tables): provide descriptive attributes of the model such as customers, products, dates, etc.</p>
+								<p>These tables are connected through "Primary Keys" and "Foreign Keys". This is where the concept of "Cardinality" 
+									(referring to the unique values in a column) and "Filter Flow" (which direction the filter is applied, up or down) come into play.</p>
+
+									<h2>Data Model Best Practices:</h2>
+<ul>
+	<li>Star Schema: 1:*</li>
+	<li>One-way Filter Flow, not bidirectional</li>
+	<li>No redundant tables</li>
+	<li>Create a date table</li>
+</ul>
+
+<h2>DAX Basics:</h2>
+<p>Operators: &amp; (concatenate text), &amp;&amp; (AND condition), || (OR condition), in (OR condition within a {list})</p>
+<p>Key Functions:</p>
+<ul>
+	<li>Calculate (Expression, [f1], [f2], ...): evaluates an expression under a set of defined filters. This function modifies and overrides its "Filter Context" with the ones already defined, taking into account that it filters tables or columns. Therefore, it is used to calculate static and non-aggregated values.</li>
+	<li>Measures: only visible through visualizations. They are evaluated through "filter context". Pro tip: they are useful when calculating aggregates.</li>
+	<li>Filter Context: filters the tables in the data model. DAX creates Filter Context when dimensions are added to rows, columns, slicers, and filters in a report. This Filter Context propagates in the model's relationships, from the 1 side to the * side.</li>
+	<li>Row Context: "iterates" the rows of a table. DAX creates Row Context when a Calculate Column is added to the model. This Row Context does not propagate in the model and needs the help of functions like RELATED or RELATEDTABLE.</li>
+</ul>
+
+<h2>DAX Engines:</h2>
+<p>DAX works through the "formula engine" (executes the query) and the "storage engine" (fetches information for the query).</p>
+<p>The FE receives a DAX Query and converts it into a Query plan (list of steps) that it sends to the SE to be executed and turned into a data cache that is sent back to the FE to be evaluated and deliver a result.</p>
+<p>There are 2 types of SE:</p>
+<ul>
+	<li>Vertipaq: stores the information in the PC's memory (import mode). Vertipaq has a column structure, that is, it saves each column separately, 
+		allowing for speed and efficiency.</li>
+</ul>
+
+<p>The objective of "Vertipaq" is to reduce the storage required to evaluate the DAX Query. It does this through "Value Encoding", "Hash Encoding", 
+	and "Run Length Encoding" based on cardinality, repeated values, row count, and data type.</p>
+
+<p>Value Encoding: uses mathematical processes that determine the relationship between the values within a column and converts them into smaller values to optimize storage
+	 - only works with integers. Eg: City ID (10215,10216) transforms into City ID (215,216). </p>
+
+<p>Hash Encoding and Run Length Encoding in Vertipaq: </p>
+	 <p>Hash Encoding is a technique used in Vertipaq engine to build a dictionary of distinct items in a column and assign a unique number (integer or decimal) 
+		to each item in an indexed fashion, based on the number of items instead of the length of the string.</p>
+	 <p>For example, a column of Products (CB, T, B, B, CB, T) would be encoded as (CB=0, T=1, B=2) and then as (0, 1, 3, 3, 0, 1).</p>
+	 <p>Run Length Encoding (RLE) is another technique used to reduce the size of a column by grouping duplicates. 
+		Columns can have both RLE and Hash Encoding/Value Encoding (VE) at the same time to further optimize storage.</p>
+	 <p>"Vertipaq Relationship" refers to the relationship between the Vertipaq engine and the data it stores in memory.
+		 The engine uses Value Encoding, Hash Encoding, and Run Length Encoding to optimize storage and reduce the storage necessary to evaluate DAX queries. </p>
+
+		 <div class="image main"><img src="images/vertipaq.png" alt="" /></div>
+
+
+
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+							<form method="post" action="#">
+								<div class="fields">
+									<div class="field">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" />
+									</div>
+									<div class="field">
+										<label for="email">Email</label>
+										<input type="text" name="email" id="email" />
+									</div>
+									<div class="field">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" rows="3"></textarea>
+									</div>
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Todavía no habilitado" /></li>
+								</ul>
+							</form>
+						</section>
+						<section class="split contact">
+							<section class="alt">
+								<h3>Location</h3>
+								<p>Santiago, Chile<br />
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p><a href="#">+569-64682665</a></p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="#">luis.olcay@uc.cl</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="https://www.linkedin.com/in/luis-olcay/" class="icon brands alt fa-linkedin"><span class="label">Linkedin</span></a></li>
+									<li><a href="https://github.com/LuisOlcay20" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; 🐅🐉🦉</li><li>Design by: <a href="https://html5up.net">Luis Olcay</a></li></ul>					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
